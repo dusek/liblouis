@@ -1,6 +1,7 @@
 # Introduction
 
-[![Build Status](https://travis-ci.org/liblouis/liblouis.svg?branch=master)](https://travis-ci.org/liblouis/liblouis)
+[![Build Status on Linux](https://travis-ci.org/liblouis/liblouis.svg?branch=master)](https://travis-ci.org/liblouis/liblouis)
+[![Build Status on Windows](https://ci.appveyor.com/api/projects/status/013hpb3lkuc0iw3n/branch/appveyor-ci?svg=true)](https://ci.appveyor.com/project/dusek/liblouis)
 
 Liblouis is an open-source braille translator and back-translator
 named in honor of [Louis Braille][]. It features support for computer
