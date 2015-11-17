@@ -1,0 +1,44 @@
+version: '{build}'
+
+environment:
+  matrix:
+    - VC: 14
+      UCS: 2
+    - VC: 12
+      UCS: 2
+    - VC: 11
+      UCS: 2
+    - VC: 10
+      UCS: 2
+    - VC: 9
+      UCS: 2
+    - VC: 14
+      UCS: 4
+    - VC: 12
+      UCS: 4
+    - VC: 11
+      UCS: 4
+    - VC: 10
+      UCS: 4
+    - VC: 9
+      UCS: 4
+
+platform:
+  - x86
+  - x64
+
+install:
+#  - '"C:\Program Files\Microsoft SDKs\Windows\v8.1\Bin\SetEnv.cmd" /%PLATFORM%'
+  - '"C:\Program Files (x86)\Microsoft Visual Studio %VC%.0\VC\vcvarsall.bat" %PLATFORM%'
+
+build_script:
+  - cd windows
+  - echo UCS=%UCS% >configure.mk
+  - nmake /f Makefile.nmake
+  - 'cl /?'
+  - cl
+
+after_build:
+  - set LIBLOUIS_ARCHIVE=liblouis-vc%VC%-%PLATFORM%-ucs%UCS%-build%APPVEYOR_BUILD_NUMBER%.zip
+  - 7z a %LIBLOUIS_ARCHIVE% %APPVEYOR_BUILD_FOLDER%\windows\liblouis.dll %APPVEYOR_BUILD_FOLDER%\windows\liblouis.lib
+  - appveyor PushArtifact %LIBLOUIS_ARCHIVE%
